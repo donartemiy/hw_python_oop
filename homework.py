@@ -1,15 +1,15 @@
 from dataclasses import dataclass, asdict
-from typing import Type
+from typing import Type, List
 
 
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     training_type: str
-    duration: int
+    duration: float
     distance: float
     speed: float
-    calories: int
+    calories: float
 
     def get_message(self) -> str:
         return ('Тип тренировки: {training_type}; '
@@ -120,7 +120,7 @@ class Swimming(Training):
                 * self.duration)
 
 
-def read_package(workout_type: str, data: list[int]) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     types_training: dict[str, Type] = {
         'SWM': Swimming,
