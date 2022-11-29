@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from typing import Type, List
+from typing import Type, List 
 
 
 @dataclass
@@ -120,16 +120,16 @@ class Swimming(Training):
                 * self.duration)
 
 
-def read_package(workout_type: str, data: List[int]) -> Training:
+def read_package(workout_type: str, data: List[float]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    types_training: dict[str, Type] = {
+    types_training: dict[str, Type[Training]] = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking
     }
 
-    if workout_type not in types_training.keys():
-        raise Exception(f'{workout_type} - некорреный тип тренеровки')
+    if workout_type not in types_training:
+        raise ValueError(f'{workout_type} - некорреный тип тренеровки')
     return types_training[workout_type](*data)
 
 
